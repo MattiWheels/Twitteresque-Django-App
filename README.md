@@ -1,5 +1,4 @@
 Python 3.8.2
-
 Django 3.1.4
 
 The beginnings of a simple twitter-like platform. Following [this tutorial](https://youtu.be/f1R_bykXHGE), but will be experimenting with other features and the various ways to implement them.

@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h2>Welcome to poet ~</h2>
-<p>An experimental, (& what will be a) twitter-like environment. Based on
-    <a href="https://youtu.be/f1R_bykXHGE">this tutorial</a>.
-</p>
+
+<div class="row text-center mt-3">
+    <div class="column">
+        <p>Welcome to poet ~ An experimental, (& what will be a) twitter-like
+        environment. Based on <a href="https://youtu.be/f1R_bykXHGE">this tutorial</a>.
+        </p>
+    </div>
+</div>
 
 <div id="notions">
     Loading...
@@ -24,16 +28,15 @@ const responseType = "json"
 
 function handleDidLike(notion_id, currentCount ) {
     console.log(notion_id, currentCount)
-    return
 }
 
 function likeButton(notion) {
-    return "<button class='btn btn-primary btn-small' onclick='handleDidLike(" +
+    return "<button class='btn btn-primary btn-sm' onclick='handleDidLike(" +
     notion.id + ", " + notion.likes + ")'>" + notion.likes + "&nbsp;Like</button>"
 }
 
 function formatNotionElement(notion) {
-    var formattedNotion = "<div class='mb-4 tweet' id='tweet-" + notion.id + "'>"
+    var formattedNotion = "<div class='col-12 col-md-10 rounded mx-auto mb-4 p-4 border bg-dark text-light tweet' id='tweet-" + notion.id + "'>"
         + "<p>" + notion.content + "</p><div class='btn-group'>" +
         likeButton(notion) + "</div></div>"
     return formattedNotion
