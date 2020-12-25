@@ -10,18 +10,50 @@
     <a href="https://youtu.be/f1R_bykXHGE">this tutorial</a>.
 </p>
 
+<div id="notions">
+    Loading...
+</div>
+
 <script>
+const notionsElement = document.getElementById("notions") // select html element
+
 const xhr = new XMLHttpRequest()
 const method = "GET"
 const url = "/notions"
 const responseType = "json"
+
+function handleDidLike(notion_id, currentCount ) {
+    console.log(notion_id, currentCount)
+    return
+}
+
+function likeButton(notion) {
+    return "<button class='btn btn-primary btn-small' onclick='handleDidLike(" +
+    notion.id + ", " + notion.likes + ")'>" + notion.likes + "&nbsp;Like</button>"
+}
+
+function formatNotionElement(notion) {
+    var formattedNotion = "<div class='mb-4 tweet' id='tweet-" + notion.id + "'>"
+        + "<p>" + notion.content + "</p><div class='btn-group'>" +
+        likeButton(notion) + "</div></div>"
+    return formattedNotion
+}
 
 xhr.responseType = responseType
 xhr.open(method, url)
 xhr.onload = function() {
     const serverResponse = xhr.response
     var listedItems = serverResponse.response
-    console.log(listedItems)
+    var finalNotionStr = ""
+    var i
+
+    for (i=0;i<listedItems.length;i++) {
+        var notionObj = listedItems[i]
+        var current = formatNotionElement(notionObj)
+        finalNotionStr += current
+    }
+
+    notionsElement.innerHTML = finalNotionStr
 }
 xhr.send()
 

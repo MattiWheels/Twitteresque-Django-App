@@ -1,3 +1,4 @@
+import random
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render
 
@@ -8,7 +9,7 @@ def home_view(request, *args, **kwargs):
 
 def notion_list_view(request, *args, **kwargs):
     objs = Notion.objects.all()
-    notions_list = [{"id": x.id, "content": x.content} for x in objs]
+    notions_list = [{"id": x.id, "content": x.content, "likes": random.randint(0, 312)} for x in objs]
 
     # REST API VIEW
     data = {
