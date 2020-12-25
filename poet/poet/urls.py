@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from notion.views import home_view, notion_detail_view
+from notion.views import home_view, notion_detail_view, notion_list_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
+    path('notions', notion_list_view),
     path('notions/<int:notion_id>', notion_detail_view),
 ]

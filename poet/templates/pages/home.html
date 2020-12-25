@@ -9,4 +9,21 @@
 <p>An experimental, (& what will be a) twitter-like environment. Based on
     <a href="https://youtu.be/f1R_bykXHGE">this tutorial</a>.
 </p>
+
+<script>
+const xhr = new XMLHttpRequest()
+const method = "GET"
+const url = "/notions"
+const responseType = "json"
+
+xhr.responseType = responseType
+xhr.open(method, url)
+xhr.onload = function() {
+    const serverResponse = xhr.response
+    var listedItems = serverResponse.response
+    console.log(listedItems)
+}
+xhr.send()
+
+</script>
 {% endblock %}

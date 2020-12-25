@@ -6,13 +6,22 @@ from .models import Notion
 def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html", context={}, status=200)
 
+def notion_list_view(request, *args, **kwargs):
+    objs = Notion.objects.all()
+    notions_list = [{"id": x.id, "content": x.content} for x in objs]
+
+    # REST API VIEW
+    data = {
+        "response": notions_list
+    }
+    return JsonResponse(data)
+
 def notion_detail_view(request, notion_id, *args, **kwargs):
 
     # REST API VIEW
     data = {
         "id": notion_id,
     }
-
     status = 200
 
     try:
