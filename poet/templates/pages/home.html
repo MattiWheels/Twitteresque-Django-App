@@ -7,10 +7,20 @@
 {% block content %}
 
 <div class="row text-center mt-3">
-    <div class="column">
+    <div class="col">
         <p>Welcome to poet ~ An experimental, (& what will be a) twitter-like
         environment. Based on <a href="https://youtu.be/f1R_bykXHGE">this tutorial</a>.
         </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mx-auto col-10">
+        <form class="form" id="notion-create-form" method="POST" action="/create-notion">{% csrf_token %}
+            <input type="hidden" value="/" name="next" />
+            <textarea class="form-control" name="content" placeholder="type your thoughts..."></textarea>
+            <button type="submit" class="btn btn-primary">ingress</button>
+        </form>
     </div>
 </div>
 
@@ -19,12 +29,43 @@
 </div>
 
 <script>
+
+/*
+function notionCreateFormDidSubmit(event) {
+    event.preventDefault()
+}
+*/
+
+const notionCreateFormElement = document.getElementById("notion-create-form")
+
+// notionCreateFormElement.addEventListener("submit", notionCreateFormDidSubmit)
+
 const notionsElement = document.getElementById("notions") // select html element
 
-const xhr = new XMLHttpRequest()
-const method = "GET"
-const url = "/notions"
-const responseType = "json"
+function loadNotions(notionsElement) {
+    const xhr = new XMLHttpRequest()
+    const method = "GET"
+    const url = "/notions"
+    const responseType = "json"
+
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+        const serverResponse = xhr.response
+        var listedItems = serverResponse.response
+        var finalNotionStr = ""
+        var i
+
+        for (i=0;i<listedItems.length;i++) {
+            var notionObj = listedItems[i]
+            var current = formatNotionElement(notionObj)
+            finalNotionStr += current
+        }
+
+        notionsElement.innerHTML = finalNotionStr
+    }
+    xhr.send()
+}
 
 function handleDidLike(notion_id, currentCount ) {
     console.log(notion_id, currentCount)
@@ -42,23 +83,7 @@ function formatNotionElement(notion) {
     return formattedNotion
 }
 
-xhr.responseType = responseType
-xhr.open(method, url)
-xhr.onload = function() {
-    const serverResponse = xhr.response
-    var listedItems = serverResponse.response
-    var finalNotionStr = ""
-    var i
-
-    for (i=0;i<listedItems.length;i++) {
-        var notionObj = listedItems[i]
-        var current = formatNotionElement(notionObj)
-        finalNotionStr += current
-    }
-
-    notionsElement.innerHTML = finalNotionStr
-}
-xhr.send()
+loadNotions(notionsElement)
 
 </script>
 {% endblock %}

@@ -6,7 +6,7 @@ The beginnings of a simple twitter-like platform. Following [this tutorial](http
 
 ###### SECRET_KEY
 
-Be sure to generate a `SECRET_KEY` for the `settings.py` file. You can use a shell that has access to the django package to generate a `SECRET_KEY` string with:
+Be sure to generate a `SECRET_KEY` for the `settings.py` module. You can use a shell that has access to the django package to generate a `SECRET_KEY` string with:
 
 ```Python
 >>>from django.core.management.utils import get_random_secret_key
@@ -23,6 +23,7 @@ Copy and paste that string into the `SECRET_KEY` variable in `settings.py`.
         - Image
     - Delete
     - RT
+    - Like
 
 2. Users
     - Register
