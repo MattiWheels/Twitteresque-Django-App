@@ -1,8 +1,9 @@
-Python 3.8.2
+###### ABOUT
 
+Python 3.8.2<br>
 Django 3.1.4
 
-The beginnings of a simple twitter-like platform. Following [this tutorial](https://youtu.be/f1R_bykXHGE), but will be experimenting with other features and the various ways to implement them.
+The beginnings of a simple twitter-like platform. I am following [this tutorial](https://youtu.be/f1R_bykXHGE), but will also be experimenting with other features and various ways to implement them.
 
 ###### SECRET_KEY
 
@@ -15,7 +16,7 @@ Be sure to generate a `SECRET_KEY` for the `settings.py` module. You can use a s
 
 Copy and paste that string into the `SECRET_KEY` variable in `settings.py`.
 
-###### Todo
+###### TODO
 
 1. Post posts
     - Create
