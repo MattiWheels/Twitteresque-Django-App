@@ -7,15 +7,15 @@ The beginnings of a simple twitter-like platform. I am following [this tutorial]
 
 ###### INSTALL
 
-You can clone this repository with 'git clone https://github.com/MattiWheels/Twitteresque-Django-App.git'
+You can clone this repository with `git clone https://github.com/MattiWheels/Twitteresque-Django-App.git`
 
-Make sure you install django: 'python -m pip install Django'
+Make sure you install django: `python -m pip install Django`
 
-Alternatively, you can install all of the required packages: 'python -m pip install -r requirements.txt'
+Alternatively, you can install all of the required packages: `python -m pip install -r requirements.txt`
 
 You may consider creating a virtual environment in your project folder to help consolidate the packages used in this project.
 
-If you recieve the error 'sqlite3.OperationalError: no such table: notion_notion' then make sure to run 'python manage.py makemigrations' and 'python manage.py migrate --run-syncdb'
+If you recieve the error `sqlite3.OperationalError: no such table: notion_notion` then make sure to run `python manage.py makemigrations` and `python manage.py migrate --run-syncdb`
 
 
 ###### SECRET_KEY
