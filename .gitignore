@@ -2,3 +2,4 @@
 **/__pycache__
 /venv
 poet/db.sqlite3
+poet/poet/secret_key.py
