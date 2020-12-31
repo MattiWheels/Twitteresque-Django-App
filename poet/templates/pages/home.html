@@ -14,9 +14,10 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row mb-4">
     <div class="col-md-4 mx-auto col-10">
-        <form class="form" id="notion-create-form" method="POST" action="/create-notion">{% csrf_token %}
+        <form class="form" id="notion-create-form" method="POST" action="/create-notion">
+            {% csrf_token %}
             <input type="hidden" value="/" name="next" />
             <textarea class="form-control" name="content" placeholder="type your thoughts..."></textarea>
             <button type="submit" class="btn btn-primary">ingress</button>
@@ -30,60 +31,69 @@
 
 <script>
 
-/*
-function notionCreateFormDidSubmit(event) {
-    event.preventDefault()
+function handleNotionFormSubmitted(event) {
+    event.preventDefault();
+    const myForm = event.target;
+    const myFormData = new FormData(myForm);
+    const url = myForm.getAttribute("action");
+    const method = myForm.getAttribute("method");
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function() {
+        const serverResponse = xhr.response;
+        console.log(serverResponse)
+    }
+    xhr.send(myFormData);
 }
-*/
 
-const notionCreateFormElement = document.getElementById("notion-create-form")
+const notionFormElement = document.getElementById("notion-create-form");
 
-// notionCreateFormElement.addEventListener("submit", notionCreateFormDidSubmit)
+notionFormElement.addEventListener("submit", handleNotionFormSubmitted);
 
-const notionsElement = document.getElementById("notions") // select html element
+const notionsElement = document.getElementById("notions"); // select html element
 
 function loadNotions(notionsElement) {
-    const xhr = new XMLHttpRequest()
-    const method = "GET"
-    const url = "/notions"
-    const responseType = "json"
+    const xhr = new XMLHttpRequest();
+    const method = "GET";
+    const url = "/notions";
+    const responseType = "json";
 
-    xhr.responseType = responseType
-    xhr.open(method, url)
+    xhr.responseType = responseType;
+    xhr.open(method, url);
     xhr.onload = function() {
-        const serverResponse = xhr.response
-        var listedItems = serverResponse.response
-        var finalNotionStr = ""
-        var i
+        const serverResponse = xhr.response;
+        var listedItems = serverResponse.response;
+        var finalNotionStr = "";
+        var i;
 
         for (i=0;i<listedItems.length;i++) {
-            var notionObj = listedItems[i]
-            var current = formatNotionElement(notionObj)
-            finalNotionStr += current
+            var notionObj = listedItems[i];
+            var current = formatNotionElement(notionObj);
+            finalNotionStr += current;
         }
 
-        notionsElement.innerHTML = finalNotionStr
+        notionsElement.innerHTML = finalNotionStr;
     }
-    xhr.send()
+    xhr.send();
 }
 
 function handleDidLike(notion_id, currentCount ) {
-    console.log(notion_id, currentCount)
+    console.log(notion_id, currentCount);
 }
 
 function likeButton(notion) {
     return "<button class='btn btn-primary btn-sm' onclick='handleDidLike(" +
-    notion.id + ", " + notion.likes + ")'>" + notion.likes + "&nbsp;Like</button>"
+    notion.id + ", " + notion.likes + ")'>" + notion.likes + "&nbsp;Like</button>";
 }
 
 function formatNotionElement(notion) {
     var formattedNotion = "<div class='col-12 col-md-10 rounded mx-auto mb-4 p-4 border bg-dark text-light tweet' id='tweet-" + notion.id + "'>"
         + "<p>" + notion.content + "</p><div class='btn-group'>" +
-        likeButton(notion) + "</div></div>"
-    return formattedNotion
+        likeButton(notion) + "</div></div>";
+    return formattedNotion;
 }
 
-loadNotions(notionsElement)
+loadNotions(notionsElement);
 
 </script>
 {% endblock %}
